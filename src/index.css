@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 160 30% 4%;
+    --foreground: 80 20% 90%;
+
+    --card: 160 25% 8%;
+    --card-foreground: 80 20% 90%;
+
+    --popover: 160 25% 8%;
+    --popover-foreground: 80 20% 90%;
+
+    --primary: 145 72% 40%;
+    --primary-foreground: 160 30% 4%;
+
+    --secondary: 160 20% 14%;
+    --secondary-foreground: 80 20% 90%;
+
+    --muted: 160 15% 12%;
+    --muted-foreground: 160 10% 55%;
+
+    --accent: 43 80% 55%;
+    --accent-foreground: 160 30% 4%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 160 20% 15%;
+    --input: 160 20% 15%;
+    --ring: 145 72% 40%;
+
+    --radius: 0.75rem;
+
+    --emerald-glow: 145 80% 50%;
+    --gold: 43 80% 55%;
+    --gold-light: 43 90% 70%;
+    --dark-deep: 160 35% 3%;
+    --dark-surface: 160 25% 7%;
+    --neon-green: 120 100% 60%;
+
+    --sidebar-background: 160 25% 6%;
+    --sidebar-foreground: 80 20% 90%;
+    --sidebar-primary: 145 72% 40%;
+    --sidebar-primary-foreground: 160 30% 4%;
+    --sidebar-accent: 160 20% 12%;
+    --sidebar-accent-foreground: 80 20% 90%;
+    --sidebar-border: 160 20% 15%;
+    --sidebar-ring: 145 72% 40%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+@layer utilities {
+  .text-gradient-primary {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--emerald-glow)));
+  }
+
+  .text-gradient-gold {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(var(--gold)), hsl(var(--gold-light)));
+  }
+
+  .glow-emerald {
+    box-shadow: 0 0 30px -5px hsl(var(--emerald-glow) / 0.3),
+                0 0 60px -10px hsl(var(--emerald-glow) / 0.15);
+  }
+
+  .glow-gold {
+    box-shadow: 0 0 30px -5px hsl(var(--gold) / 0.3);
+  }
+
+  .glow-text-emerald {
+    text-shadow: 0 0 20px hsl(var(--emerald-glow) / 0.5),
+                 0 0 40px hsl(var(--emerald-glow) / 0.2);
+  }
+
+  .glow-text-gold {
+    text-shadow: 0 0 20px hsl(var(--gold) / 0.5);
+  }
+
+  .glass-surface {
+    @apply bg-card/60 backdrop-blur-xl border border-border/50;
+  }
+
+  .gradient-radial-emerald {
+    background: radial-gradient(circle at center, hsl(var(--emerald-glow) / 0.15) 0%, transparent 70%);
+  }
+
+  .gradient-hero {
+    background: linear-gradient(180deg, hsl(var(--dark-deep)) 0%, hsl(var(--background)) 100%);
+  }
+
+  .line-glow {
+    background: linear-gradient(90deg, transparent, hsl(var(--primary) / 0.5), transparent);
+    height: 1px;
+  }
+}
+
+/* Splash screen animation */
+@keyframes logo-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.8; }
+}
+
+@keyframes splash-fade {
+  0% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { opacity: 0; pointer-events: none; }
+}
+
+@keyframes float-up {
+  0% { transform: translateY(20px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes counter-glow {
+  0%, 100% { box-shadow: 0 0 20px hsl(var(--emerald-glow) / 0.2); }
+  50% { box-shadow: 0 0 40px hsl(var(--emerald-glow) / 0.4); }
+}
+
+@keyframes word-reveal {
+  0% { opacity: 0; transform: translateY(14px); filter: blur(8px); }
+  100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+.hero-word-reveal {
+  display: inline-block;
+  animation: word-reveal 0.8s ease-out both;
+}
+
+.hero-word-reveal:nth-of-type(2) { animation-delay: 0.08s; }
+.hero-word-reveal:nth-of-type(3) { animation-delay: 0.16s; }
+.hero-word-reveal:nth-of-type(4) { animation-delay: 0.24s; }
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(var(--dark-deep));
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary) / 0.3);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary) / 0.5);
+}
