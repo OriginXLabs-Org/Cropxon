@@ -22,6 +22,7 @@ import AgriVedaApiDocsPage from "./pages/AgriVedaApiDocsPage";
 import NotFound from "./pages/NotFound";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import BhumitraAssistant from "./components/BhumitraAssistant";
 
 const queryClient = new QueryClient();
 
@@ -59,6 +60,7 @@ const App = () => (
             <Route path="/agri-ai-hub" element={<Navigate to="/agriveda" replace />} />
             <Route path="*" element={<PageLayout><NotFound /></PageLayout>} />
           </Routes>
+          <BhumitraAssistant />
         </BrowserRouter>
       </LanguageProvider>
     </TooltipProvider>
