@@ -57,7 +57,7 @@ const App = () => (
             <Route path="/agriveda/playground" element={<PageLayout><AgriVedaPlaygroundPage /></PageLayout>} />
             <Route path="/agriveda/api-docs" element={<PageLayout><AgriVedaApiDocsPage /></PageLayout>} />
             <Route path="/agri-ai-hub" element={<Navigate to="/agriveda" replace />} />
-            <Route path="*" element={<NotFound />} />
+            <Route path="*" element={<PageLayout><NotFound /></PageLayout>} />
           </Routes>
         </BrowserRouter>
       </LanguageProvider>
