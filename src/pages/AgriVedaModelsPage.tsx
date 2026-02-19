@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { Brain, Filter, Home } from "lucide-react";
-import { agrivedaModels, cropxonEightFeatures, modelTagsById } from "@/data/agriveda";
+import { agrivedaModels, cropxonEightFeatures, huggingFaceDiscovery, modelTagsById } from "@/data/agriveda";
 import AppBreadcrumb from "@/components/AppBreadcrumb";
 
 const AgriVedaModelsPage = () => {
@@ -9,6 +9,7 @@ const AgriVedaModelsPage = () => {
   const [taskType, setTaskType] = useState("All");
   const [cropType, setCropType] = useState("All");
   const [language, setLanguage] = useState("All");
+  const [ecosystemFit, setEcosystemFit] = useState("All");
   const [edgeOnly, setEdgeOnly] = useState(false);
   const [satelliteOnly, setSatelliteOnly] = useState(false);
 
@@ -24,21 +25,47 @@ const AgriVedaModelsPage = () => {
     () => ["All", ...Array.from(new Set(agrivedaModels.flatMap((model) => model.languages))).sort()],
     [],
   );
+  const ecosystemFits = useMemo(
+    () =>
+      [
+        "All",
+        ...Array.from(
+          new Set(
+            agrivedaModels.flatMap((model) => modelTagsById[model.id]?.ecosystemFit ?? []),
+          ),
+        ).sort(),
+      ],
+    [],
+  );
 
   const filteredModels = useMemo(
     () =>
       agrivedaModels.filter((model) => {
+        const searchableText = [
+          model.repo,
+          model.task,
+          model.summary,
+          model.taskType,
+          model.cropTypes.join(" "),
+          model.languages.join(" "),
+          (modelTagsById[model.id]?.domains ?? []).join(" "),
+          (modelTagsById[model.id]?.ecosystemFit ?? []).join(" "),
+        ]
+          .join(" ")
+          .toLowerCase();
         const matchesQuery =
           query.trim().length === 0 ||
-          `${model.repo} ${model.task} ${model.summary}`.toLowerCase().includes(query.toLowerCase());
+          searchableText.includes(query.toLowerCase());
         const matchesTask = taskType === "All" || model.taskType === taskType;
         const matchesCrop = cropType === "All" || model.cropTypes.includes(cropType);
         const matchesLanguage = language === "All" || model.languages.includes(language);
+        const matchesEcosystem =
+          ecosystemFit === "All" || (modelTagsById[model.id]?.ecosystemFit ?? []).includes(ecosystemFit);
         const matchesEdge = !edgeOnly || model.edgeCompatible;
         const matchesSatellite = !satelliteOnly || model.satellite;
-        return matchesQuery && matchesTask && matchesCrop && matchesLanguage && matchesEdge && matchesSatellite;
+        return matchesQuery && matchesTask && matchesCrop && matchesLanguage && matchesEcosystem && matchesEdge && matchesSatellite;
       }),
-    [query, taskType, cropType, language, edgeOnly, satelliteOnly],
+    [query, taskType, cropType, language, ecosystemFit, edgeOnly, satelliteOnly],
   );
 
   return (
@@ -59,7 +86,7 @@ const AgriVedaModelsPage = () => {
           </div>
           <h1 className="text-3xl md:text-5xl font-bold font-display text-foreground">Browse Models</h1>
           <p className="mt-3 text-muted-foreground max-w-3xl">
-            One unified catalog of Cropxon fine-tuned agriculture models for disease prediction, pests, speech, floriculture, foods, soils, geo intelligence, and technical advisory LLM workloads.
+            The one and only AgriVeda catalog for Cropxon fine-tuned agriculture, food, flowers, soil health, scheme intelligence, nutrition, and humanity-focused AI model workloads.
           </p>
           <div className="mt-3 flex flex-wrap gap-2">
             {cropxonEightFeatures.map((item) => (
@@ -67,6 +94,17 @@ const AgriVedaModelsPage = () => {
                 {item}
               </span>
             ))}
+          </div>
+
+          <div className="mt-4 rounded-lg border border-border bg-card p-4">
+            <p className="text-xs uppercase tracking-wider text-accent">Hugging Face References</p>
+            <div className="mt-2 flex flex-wrap gap-2">
+              {huggingFaceDiscovery.map((item) => (
+                <a key={item.name} href={item.url} target="_blank" rel="noreferrer" className="rounded-full border border-primary/30 bg-primary/10 px-2 py-1 text-[10px] text-primary hover:bg-primary/15">
+                  {item.name}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -93,6 +131,9 @@ const AgriVedaModelsPage = () => {
                 <select value={language} onChange={(event) => setLanguage(event.target.value)} className="w-full rounded-md border border-border bg-card px-3 py-2 text-xs text-foreground outline-none ring-primary/40 focus:ring-1">
                   {languages.map((item) => <option key={item}>{item}</option>)}
                 </select>
+                <select value={ecosystemFit} onChange={(event) => setEcosystemFit(event.target.value)} className="w-full rounded-md border border-border bg-card px-3 py-2 text-xs text-foreground outline-none ring-primary/40 focus:ring-1">
+                  {ecosystemFits.map((item) => <option key={item}>{item}</option>)}
+                </select>
                 <label className="flex items-center gap-2 rounded-md border border-border px-3 py-2 text-xs text-foreground">
                   <input type="checkbox" checked={edgeOnly} onChange={(event) => setEdgeOnly(event.target.checked)} />
                   Edge Compatible only
@@ -114,6 +155,9 @@ const AgriVedaModelsPage = () => {
                   <p className="mt-1 text-xs text-accent">{model.task}</p>
                   <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{model.summary}</p>
                   <p className="mt-3 text-xs text-muted-foreground">Base: {model.baseModel}</p>
+                  {model.huggingFaceRef ? (
+                    <p className="mt-2 text-[11px] font-medium text-primary">HF Ref: {model.huggingFaceRef.name}</p>
+                  ) : null}
                   <div className="mt-3 flex flex-wrap gap-2 text-[10px]">
                     {model.cropTypes.slice(0, 3).map((crop) => (
                       <span key={crop} className="rounded-full border border-border/70 bg-card px-2 py-0.5 text-muted-foreground">

@@ -1,0 +1,16 @@
+{
+  "name": "CROPXON",
+  "short_name": "CROPXON",
+  "description": "Futuristic Agentic AgTech SaaS platform by OriginX Labs Private Limited.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f3f35",
+  "theme_color": "#0f3f35",
+  "icons": [
+    {
+      "src": "/favicon2.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

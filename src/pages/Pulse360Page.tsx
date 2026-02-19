@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ScanLine, Apple, Heart, Watch, Database, Home } from "lucide-react";
+import { ScanLine, Apple, Heart, Watch, Database, Home, Smartphone } from "lucide-react";
 import pulse360Img from "@/assets/pulse360.png";
 import AppBreadcrumb from "@/components/AppBreadcrumb";
 
@@ -44,6 +44,24 @@ const Pulse360Page = () => (
             <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{f.desc}</p>
           </motion.div>
         ))}
+      </div>
+
+      <div className="mt-14 glass-surface rounded-xl p-6">
+        <div className="inline-flex items-center gap-2 text-primary">
+          <Smartphone size={16} />
+          <h3 className="text-lg font-bold font-display text-foreground">Pulse360 Mobile Apps</h3>
+        </div>
+        <p className="mt-2 text-sm text-muted-foreground">
+          Pulse360 for Android and iOS is coming soon. Use the CropXon app portal for release updates and early access.
+        </p>
+        <div className="mt-4 flex flex-wrap gap-3">
+          <a href="https://app.cropxon.com" target="_blank" rel="noreferrer" className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground">
+            Android Coming Soon
+          </a>
+          <a href="https://app.cropxon.com" target="_blank" rel="noreferrer" className="rounded-lg border border-border px-4 py-2 text-sm font-semibold text-foreground">
+            iOS Coming Soon
+          </a>
+        </div>
       </div>
     </div>
   </div>

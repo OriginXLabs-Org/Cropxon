@@ -26,6 +26,11 @@ export type AgriVedaModel = {
     name: string;
     url: string;
   };
+  huggingFaceRef?: {
+    name: string;
+    url: string;
+    notes: string;
+  };
 };
 
 export type AgriVedaDataset = {
@@ -157,6 +162,39 @@ export const openSourceSources = [
   { name: "OpenAlex API source", url: "https://docs.openalex.org/" },
 ];
 
+export const huggingFaceDiscovery = [
+  {
+    name: "wambugu71/crop_leaf_diseases_vit",
+    url: "https://huggingface.co/wambugu71/crop_leaf_diseases_vit",
+    focus: "Multi-crop disease classification (corn, potato, rice, wheat)",
+  },
+  {
+    name: "Arko007/nfnet-f1-plant-disease",
+    url: "https://huggingface.co/Arko007/nfnet-f1-plant-disease",
+    focus: "High-class-count crop disease classification (88 classes)",
+  },
+  {
+    name: "Abuzaid01/plant-disease-classifier",
+    url: "https://huggingface.co/Abuzaid01/plant-disease-classifier",
+    focus: "EfficientNet disease classifier based on PlantVillage",
+  },
+  {
+    name: "Daksh159/plant-disease-mobilenetv2",
+    url: "https://huggingface.co/Daksh159/plant-disease-mobilenetv2",
+    focus: "MobileNetV2 edge-friendly disease model",
+  },
+  {
+    name: "openai/whisper-large-v3",
+    url: "https://huggingface.co/openai/whisper-large-v3",
+    focus: "Speech-to-text foundation for multilingual advisory",
+  },
+  {
+    name: "meta-llama/Meta-Llama-3-8B-Instruct",
+    url: "https://huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct",
+    focus: "LLM base for Agri advisory and policy assistants",
+  },
+];
+
 export const cropxonEightFeatures = [
   "AgriSakha",
   "MandiSetu",
@@ -248,6 +286,11 @@ export const agrivedaModels: AgriVedaModel[] = [
     downloadLabel: "Download Weights",
     communityLabel: "Community Discussion",
     openSourceSource: { name: "Ultralytics YOLOv8", url: "https://docs.ultralytics.com/" },
+    huggingFaceRef: {
+      name: "wambugu71/crop_leaf_diseases_vit",
+      url: "https://huggingface.co/wambugu71/crop_leaf_diseases_vit",
+      notes: "Reference disease model used for comparative benchmarking before Cropxon fine-tuning.",
+    },
   },
   {
     id: "agrillm-refine-8b",
@@ -286,6 +329,11 @@ export const agrivedaModels: AgriVedaModel[] = [
     downloadLabel: "Download Adapter",
     communityLabel: "Community Discussion",
     openSourceSource: { name: "Meta Llama 3", url: "https://huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct" },
+    huggingFaceRef: {
+      name: "meta-llama/Meta-Llama-3-8B-Instruct",
+      url: "https://huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct",
+      notes: "Base instruction model adapted to agricultural domain with LoRA.",
+    },
   },
   {
     id: "geocrop-segformer",
@@ -340,6 +388,11 @@ export const agrivedaModels: AgriVedaModel[] = [
     downloadLabel: "Download Weights",
     communityLabel: "Community Discussion",
     openSourceSource: { name: "LLaVA", url: "https://github.com/haotian-liu/LLaVA" },
+    huggingFaceRef: {
+      name: "llava-hf/llava-1.5-7b-hf",
+      url: "https://huggingface.co/llava-hf/llava-1.5-7b-hf",
+      notes: "Vision-language starter architecture used in SoilSense multimodal stack.",
+    },
   },
   {
     id: "pestwatch-ip102",
@@ -394,6 +447,11 @@ export const agrivedaModels: AgriVedaModel[] = [
     downloadLabel: "Download Adapter",
     communityLabel: "Community Discussion",
     openSourceSource: { name: "OpenAI Whisper", url: "https://huggingface.co/openai/whisper-large" },
+    huggingFaceRef: {
+      name: "openai/whisper-large-v3",
+      url: "https://huggingface.co/openai/whisper-large-v3",
+      notes: "ASR base extended for agri dialect adaptation.",
+    },
   },
   {
     id: "florabloom-102",
@@ -421,6 +479,11 @@ export const agrivedaModels: AgriVedaModel[] = [
     downloadLabel: "Download Weights",
     communityLabel: "Community Discussion",
     openSourceSource: { name: "Oxford Flowers 102", url: "https://www.robots.ox.ac.uk/~vgg/data/flowers/102/" },
+    huggingFaceRef: {
+      name: "Abuzaid01/plant-disease-classifier",
+      url: "https://huggingface.co/Abuzaid01/plant-disease-classifier",
+      notes: "Used as disease feature-transfer reference before floriculture specialization.",
+    },
   },
   {
     id: "foodguard-101",
@@ -448,6 +511,11 @@ export const agrivedaModels: AgriVedaModel[] = [
     downloadLabel: "Download Weights",
     communityLabel: "Community Discussion",
     openSourceSource: { name: "Food-101", url: "https://data.vision.ee.ethz.ch/cvl/datasets_extra/food-101/" },
+    huggingFaceRef: {
+      name: "nateraw/food",
+      url: "https://huggingface.co/models?search=food-101",
+      notes: "Food-101 model family references used for quality and nutrition transfer-learning.",
+    },
   },
   {
     id: "agripolicy-copilot-7b",
@@ -475,6 +543,11 @@ export const agrivedaModels: AgriVedaModel[] = [
     downloadLabel: "Download Adapter",
     communityLabel: "Community Discussion",
     openSourceSource: { name: "Meta Llama 3", url: "https://huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct" },
+    huggingFaceRef: {
+      name: "meta-llama/Meta-Llama-3-8B-Instruct",
+      url: "https://huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct",
+      notes: "Policy assistant backbone with Cropxon RAG over scheme corpora.",
+    },
   },
   {
     id: "yieldcast-climate-tft",
@@ -529,6 +602,11 @@ export const agrivedaModels: AgriVedaModel[] = [
     downloadLabel: "Download Weights",
     communityLabel: "Community Discussion",
     openSourceSource: { name: "ViT foundation", url: "https://huggingface.co/google/vit-base-patch16-224" },
+    huggingFaceRef: {
+      name: "Arko007/nfnet-f1-plant-disease",
+      url: "https://huggingface.co/Arko007/nfnet-f1-plant-disease",
+      notes: "Reference for robust disease class handling in floriculture pipeline.",
+    },
   },
   {
     id: "nutrivision-plate-lm",
@@ -556,6 +634,11 @@ export const agrivedaModels: AgriVedaModel[] = [
     downloadLabel: "Download Adapter",
     communityLabel: "Community Discussion",
     openSourceSource: { name: "LLaVA", url: "https://github.com/haotian-liu/LLaVA" },
+    huggingFaceRef: {
+      name: "llava-hf/llava-1.5-7b-hf",
+      url: "https://huggingface.co/llava-hf/llava-1.5-7b-hf",
+      notes: "Multimodal base for nutrition plate understanding and advisory.",
+    },
   },
   {
     id: "schemeseva-rag-4b",
@@ -583,6 +666,11 @@ export const agrivedaModels: AgriVedaModel[] = [
     downloadLabel: "Download Adapter",
     communityLabel: "Community Discussion",
     openSourceSource: { name: "Meta Llama 3", url: "https://huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct" },
+    huggingFaceRef: {
+      name: "meta-llama/Meta-Llama-3-8B-Instruct",
+      url: "https://huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct",
+      notes: "Scheme assistant foundation model with Cropxon domain RAG.",
+    },
   },
   {
     id: "soillab-regressor",
@@ -637,5 +725,10 @@ export const agrivedaModels: AgriVedaModel[] = [
     downloadLabel: "Download Adapter",
     communityLabel: "Community Discussion",
     openSourceSource: { name: "Mistral Instruct", url: "https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.2" },
+    huggingFaceRef: {
+      name: "mistralai/Mistral-7B-Instruct-v0.2",
+      url: "https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.2",
+      notes: "Planning assistant base adapted for crop calendar intelligence.",
+    },
   },
 ];

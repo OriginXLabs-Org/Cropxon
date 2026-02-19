@@ -8,6 +8,7 @@ import {
   agrivedaPillars,
   cropxonEightFeatures,
   datasetTagsByName,
+  huggingFaceDiscovery,
   modelTagsById,
 } from "@/data/agriveda";
 import AppBreadcrumb from "@/components/AppBreadcrumb";
@@ -17,6 +18,7 @@ const AgriVedaPage = () => {
   const [taskType, setTaskType] = useState("All");
   const [cropType, setCropType] = useState("All");
   const [language, setLanguage] = useState("All");
+  const [ecosystemFit, setEcosystemFit] = useState("All");
   const [edgeOnly, setEdgeOnly] = useState(false);
   const [satelliteOnly, setSatelliteOnly] = useState(false);
 
@@ -32,21 +34,47 @@ const AgriVedaPage = () => {
     () => ["All", ...Array.from(new Set(agrivedaModels.flatMap((model) => model.languages))).sort()],
     [],
   );
+  const ecosystemFits = useMemo(
+    () =>
+      [
+        "All",
+        ...Array.from(
+          new Set(
+            agrivedaModels.flatMap((model) => modelTagsById[model.id]?.ecosystemFit ?? []),
+          ),
+        ).sort(),
+      ],
+    [],
+  );
 
   const filteredModels = useMemo(
     () =>
       agrivedaModels.filter((model) => {
+        const searchableText = [
+          model.repo,
+          model.task,
+          model.summary,
+          model.taskType,
+          model.cropTypes.join(" "),
+          model.languages.join(" "),
+          (modelTagsById[model.id]?.domains ?? []).join(" "),
+          (modelTagsById[model.id]?.ecosystemFit ?? []).join(" "),
+        ]
+          .join(" ")
+          .toLowerCase();
         const matchesQuery =
           query.trim().length === 0 ||
-          `${model.repo} ${model.task} ${model.summary}`.toLowerCase().includes(query.toLowerCase());
+          searchableText.includes(query.toLowerCase());
         const matchesTask = taskType === "All" || model.taskType === taskType;
         const matchesCrop = cropType === "All" || model.cropTypes.includes(cropType);
         const matchesLanguage = language === "All" || model.languages.includes(language);
+        const matchesEcosystem =
+          ecosystemFit === "All" || (modelTagsById[model.id]?.ecosystemFit ?? []).includes(ecosystemFit);
         const matchesEdge = !edgeOnly || model.edgeCompatible;
         const matchesSatellite = !satelliteOnly || model.satellite;
-        return matchesQuery && matchesTask && matchesCrop && matchesLanguage && matchesEdge && matchesSatellite;
+        return matchesQuery && matchesTask && matchesCrop && matchesLanguage && matchesEcosystem && matchesEdge && matchesSatellite;
       }),
-    [query, taskType, cropType, language, edgeOnly, satelliteOnly],
+    [query, taskType, cropType, language, ecosystemFit, edgeOnly, satelliteOnly],
   );
 
   return (
@@ -109,6 +137,9 @@ const AgriVedaPage = () => {
                 <select value={language} onChange={(event) => setLanguage(event.target.value)} className="w-full rounded-md border border-border bg-card px-3 py-2 text-xs text-foreground outline-none ring-primary/40 focus:ring-1">
                   {languages.map((item) => <option key={item}>{item}</option>)}
                 </select>
+                <select value={ecosystemFit} onChange={(event) => setEcosystemFit(event.target.value)} className="w-full rounded-md border border-border bg-card px-3 py-2 text-xs text-foreground outline-none ring-primary/40 focus:ring-1">
+                  {ecosystemFits.map((item) => <option key={item}>{item}</option>)}
+                </select>
                 <label className="flex items-center gap-2 rounded-md border border-border px-3 py-2 text-xs text-foreground">
                   <input type="checkbox" checked={edgeOnly} onChange={(event) => setEdgeOnly(event.target.checked)} />
                   Edge Compatible only
@@ -124,6 +155,7 @@ const AgriVedaPage = () => {
                     setTaskType("All");
                     setCropType("All");
                     setLanguage("All");
+                    setEcosystemFit("All");
                     setEdgeOnly(false);
                     setSatelliteOnly(false);
                   }}
@@ -171,6 +203,21 @@ const AgriVedaPage = () => {
               </div>
             </div>
 
+            <div className="glass-surface rounded-xl p-6">
+              <h2 className="text-xl font-bold font-display text-foreground">Hugging Face Reference Models</h2>
+              <p className="mt-2 text-sm text-muted-foreground">
+                Curated open models used as reference baselines for Cropxon fine-tuning in AgriVeda.
+              </p>
+              <div className="mt-4 grid gap-3 md:grid-cols-2">
+                {huggingFaceDiscovery.map((item) => (
+                  <a key={item.name} href={item.url} target="_blank" rel="noreferrer" className="rounded-lg border border-border p-4 transition-colors hover:border-primary/40">
+                    <p className="text-sm font-semibold text-primary">{item.name}</p>
+                    <p className="mt-1 text-xs text-muted-foreground">{item.focus}</p>
+                  </a>
+                ))}
+              </div>
+            </div>
+
             <div id="models" className="glass-surface rounded-xl p-6">
               <div className="inline-flex items-center gap-2 text-primary mb-4">
                 <Brain size={18} />
@@ -189,6 +236,9 @@ const AgriVedaPage = () => {
                       <span className="rounded-full border border-border px-2 py-0.5">{model.edgeCompatible ? "Edge" : "Cloud"}</span>
                       <span className="rounded-full border border-border px-2 py-0.5">{model.satellite ? "Satellite" : "Ground"}</span>
                     </div>
+                    {model.huggingFaceRef ? (
+                      <p className="mt-2 text-[11px] font-medium text-primary">HF Ref: {model.huggingFaceRef.name}</p>
+                    ) : null}
                     <div className="mt-2 flex flex-wrap gap-2 text-[10px]">
                       {model.cropTypes.slice(0, 3).map((crop) => (
                         <span key={crop} className="rounded-full border border-border/70 bg-card px-2 py-0.5 text-muted-foreground">

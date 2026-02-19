@@ -53,6 +53,14 @@ const AgriVedaModelPage = () => {
             <a href={model.openSourceSource.url} target="_blank" rel="noreferrer" className="text-sm font-medium text-primary underline underline-offset-4">
               {model.openSourceSource.name}
             </a>
+            {model.huggingFaceRef ? (
+              <p className="mt-2 text-xs text-muted-foreground">
+                Hugging Face:{" "}
+                <a href={model.huggingFaceRef.url} target="_blank" rel="noreferrer" className="font-medium text-primary underline underline-offset-4">
+                  {model.huggingFaceRef.name}
+                </a>
+              </p>
+            ) : null}
           </div>
           <div className="mt-4 flex flex-wrap gap-2 text-[10px]">
             {model.cropTypes.map((crop) => (
