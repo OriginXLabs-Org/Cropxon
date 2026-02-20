@@ -12,13 +12,13 @@ const NotFound = () => {
 
   return (
     <div className="min-h-[70vh] bg-background">
-      <div className="container mx-auto px-6 py-24">
+      <div className="container mx-auto px-4 py-20 sm:px-6 sm:py-24">
         <div className="mx-auto max-w-3xl rounded-2xl border border-border bg-card p-10 text-center">
           <div className="mx-auto inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary">
             <AlertTriangle size={26} />
           </div>
           <p className="mt-4 text-xs font-medium uppercase tracking-[0.3em] text-accent">Cropxon 404</p>
-          <h1 className="mt-3 text-4xl font-bold font-display text-foreground md:text-5xl">
+          <h1 className="mt-3 text-3xl font-bold font-display text-foreground sm:text-4xl md:text-5xl">
             Page Not Found
           </h1>
           <p className="mx-auto mt-4 max-w-xl text-muted-foreground">

@@ -126,7 +126,7 @@ const rentalPlans = [
 
 const SoilNetPage = () => (
   <div className="min-h-screen bg-background">
-    <div className="container mx-auto px-6 py-24">
+    <div className="container mx-auto px-4 py-20 sm:px-6 sm:py-24">
       <AppBreadcrumb items={[{ label: "Home", href: "/", icon: Home }, { label: "SoilNet", icon: FlaskConical }]} />
 
       <div className="flex flex-col items-center gap-16 lg:flex-row">
@@ -135,7 +135,7 @@ const SoilNetPage = () => (
             <FlaskConical size={18} />
             <p className="text-sm font-medium uppercase tracking-[0.3em]">CROPXON Soil Intelligence</p>
           </div>
-          <h1 className="text-4xl font-bold font-display md:text-6xl">
+          <h1 className="text-3xl font-bold font-display sm:text-4xl md:text-6xl">
             <span className="text-gradient-primary">CROPXON SoilNet</span>
           </h1>
           <p className="mt-2 text-xl text-accent font-medium">8-in-1 Soil Health Analysis + Android Experience</p>
@@ -273,7 +273,7 @@ const SoilNetPage = () => (
           initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-12 hidden md:block rounded-2xl border border-primary/20 bg-gradient-to-r from-primary/10 via-transparent to-accent/10 p-1"
+          className="mt-12 hidden rounded-2xl border border-primary/20 bg-gradient-to-r from-primary/10 via-transparent to-accent/10 p-1 lg:block"
         >
           <div className="overflow-x-auto rounded-xl glass-surface">
             <table className="w-full text-left">
@@ -305,7 +305,7 @@ const SoilNetPage = () => (
           </div>
         </motion.div>
 
-        <div className="mt-10 space-y-5 md:hidden">
+        <div className="mt-10 space-y-5 lg:hidden">
           {solutionComponents.map((item, i) => (
             <motion.div
               key={item.component}

@@ -79,7 +79,7 @@ const AgriVedaPage = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-6 py-24">
+      <div className="container mx-auto px-4 py-20 sm:px-6 sm:py-24">
         <AppBreadcrumb items={[{ label: "Home", href: "/", icon: Home }, { label: "AgriVeda", icon: Brain }]} />
 
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center">
@@ -87,7 +87,7 @@ const AgriVedaPage = () => {
             <Brain size={18} />
             <p className="text-sm font-medium uppercase tracking-[0.3em]">AI Model & Data Hub for Agriculture</p>
           </div>
-          <h1 className="text-4xl font-bold font-display md:text-6xl">
+          <h1 className="text-3xl font-bold font-display sm:text-4xl md:text-6xl">
             <span className="text-gradient-primary">Cropxon AgriVeda</span>
           </h1>
           <p className="mx-auto mt-4 max-w-4xl text-lg text-muted-foreground">

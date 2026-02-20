@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 const AboutSection = () => {
   return (
     <section id="about" className="py-24">
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-4 sm:px-6">
         <div className="grid gap-16 lg:grid-cols-2">
           <motion.div
             initial={{ opacity: 0, x: -20 }}

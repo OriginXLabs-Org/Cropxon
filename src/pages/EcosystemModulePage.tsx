@@ -307,7 +307,7 @@ const EcosystemModulePage = () => {
   if (!moduleData) {
     return (
       <div className="min-h-screen bg-background">
-        <div className="container mx-auto px-6 py-24">
+        <div className="container mx-auto px-4 py-20 sm:px-6 sm:py-24">
           <AppBreadcrumb
             items={[
               { label: "Home", href: "/", icon: Home },
@@ -326,7 +326,7 @@ const EcosystemModulePage = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-6 py-24">
+      <div className="container mx-auto px-4 py-20 sm:px-6 sm:py-24">
         <AppBreadcrumb
           items={[
             { label: "Home", href: "/", icon: Home },
@@ -340,7 +340,7 @@ const EcosystemModulePage = () => {
             <Sprout size={18} />
             <p className="text-sm font-medium uppercase tracking-[0.3em]">Ecosystem Module</p>
           </div>
-          <h1 className="text-4xl font-bold font-display md:text-6xl">
+          <h1 className="text-3xl font-bold font-display sm:text-4xl md:text-6xl">
             <span className="text-gradient-primary">{moduleData.title}</span>
           </h1>
           <p className="mt-2 text-xl font-medium text-accent">{moduleData.subtitle}</p>

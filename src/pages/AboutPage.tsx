@@ -28,7 +28,7 @@ const companyDetails = [
 
 const AboutPage = () => (
   <div className="min-h-screen bg-background">
-    <div className="container mx-auto px-6 py-24">
+    <div className="container mx-auto px-4 py-20 sm:px-6 sm:py-24">
       <AppBreadcrumb items={[{ label: "Home", href: "/", icon: Home }, { label: "About CROPXON", icon: Target }]} />
 
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center">
@@ -36,7 +36,7 @@ const AboutPage = () => (
           <Target size={18} />
           <p className="text-sm font-medium uppercase tracking-[0.3em]">About CROPXON</p>
         </div>
-        <h1 className="text-4xl font-bold font-display md:text-6xl text-foreground">
+        <h1 className="text-3xl font-bold font-display sm:text-4xl md:text-6xl text-foreground">
           Rebuilding Agriculture through <span className="text-gradient-primary">AI, Data & Community</span>
         </h1>
         <p className="mx-auto mt-6 max-w-3xl text-muted-foreground text-lg">

@@ -4,14 +4,16 @@ import { Sprout, Brain } from "lucide-react";
 const Footer = () => {
   return (
     <footer className="border-t border-border py-12">
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-4 sm:px-6">
         <div className="flex flex-col items-center gap-6 md:flex-row md:justify-between">
-          <Link to="/" className="flex items-center gap-3">
-            <img src="/logo1.png" alt="CROPXON" className="h-10 w-10 rounded-full object-cover border border-primary/30" />
+          <Link to="/" className="group flex items-center gap-3">
+            <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl border border-primary/45 bg-gradient-to-br from-primary/25 via-background to-accent/25 p-1 sm:h-14 sm:w-14 sm:rounded-2xl sm:p-1.5 shadow-[0_0_28px_-10px_hsl(var(--emerald-glow)/0.7)] transition-transform duration-300 group-hover:scale-105">
+              <img src="/logo1.png" alt="CROPXON" className="h-full w-full rounded-xl object-contain" />
+            </span>
             <div>
-              <span className="text-lg font-bold font-display text-gradient-primary">CROPXON</span>
-              <p className="text-[9px] text-muted-foreground">By OriginX Labs Pvt. Ltd.</p>
-              <p className="text-[9px] text-muted-foreground">From Soil to Soul 🌱</p>
+              <span className="text-base font-bold font-display text-gradient-primary sm:text-lg">CROPXON</span>
+              <p className="text-[9px] text-muted-foreground sm:text-[10px]">By OriginX Labs Pvt. Ltd.</p>
+              <p className="text-[9px] text-muted-foreground sm:text-[10px]">From Soil to Soul 🌱</p>
             </div>
           </Link>
 

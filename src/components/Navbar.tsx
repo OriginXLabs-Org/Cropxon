@@ -20,8 +20,11 @@ import {
   Building2,
   Mail,
   Orbit,
+  Sun,
+  Moon,
 } from "lucide-react";
 import { languages, useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const ecosystemLinks = [
   { label: "Ecosystem Overview", href: "/ecosystem", icon: Orbit },
@@ -49,6 +52,7 @@ const Navbar = () => {
   const [langOpen, setLangOpen] = useState(false);
   const [ecosystemOpen, setEcosystemOpen] = useState(false);
   const { currentLanguage, setLang } = useLanguage();
+  const { isDark, toggleTheme } = useTheme();
   const langRef = useRef<HTMLDivElement>(null);
   const ecosystemRef = useRef<HTMLDivElement>(null);
 
@@ -76,12 +80,14 @@ const Navbar = () => {
         scrolled ? "glass-surface shadow-lg" : "bg-transparent"
       }`}
     >
-      <div className="container mx-auto flex items-center justify-between px-6 py-3">
-        <Link to="/" className="flex items-center gap-3">
-          <img src="/logo1.png" alt="CROPXON" className="h-9 w-9 rounded-full object-cover border border-primary/30" />
+      <div className="container mx-auto flex items-center justify-between px-4 sm:px-6 py-3">
+        <Link to="/" className="group flex items-center gap-3">
+          <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-primary/45 bg-gradient-to-br from-primary/25 via-background to-accent/25 p-1 sm:h-14 sm:w-14 sm:rounded-2xl sm:p-1.5 shadow-[0_0_28px_-10px_hsl(var(--emerald-glow)/0.7)] transition-transform duration-300 group-hover:scale-105">
+            <img src="/logo1.png" alt="CROPXON" className="h-full w-full rounded-xl object-contain" />
+          </span>
           <div className="flex flex-col">
-            <span className="text-lg font-bold font-display text-gradient-primary leading-tight">CROPXON</span>
-            <span className="text-[9px] text-muted-foreground leading-tight">By OriginX Labs Pvt. Ltd.</span>
+            <span className="text-sm font-bold font-display text-gradient-primary leading-tight sm:text-lg">CROPXON</span>
+            <span className="hidden text-[9px] text-muted-foreground leading-tight sm:block">By OriginX Labs Pvt. Ltd.</span>
           </div>
         </Link>
 
@@ -163,6 +169,16 @@ const Navbar = () => {
             </AnimatePresence>
           </div>
 
+          <button
+            onClick={toggleTheme}
+            aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+            title={isDark ? "Light mode" : "Dark mode"}
+            className="inline-flex items-center gap-1.5 rounded-lg border border-border px-2.5 py-1.5 text-xs text-muted-foreground transition-colors hover:border-primary/30 hover:text-primary"
+          >
+            {isDark ? <Sun size={14} /> : <Moon size={14} />}
+            {isDark ? "Light" : "Dark"}
+          </button>
+
           <Link
             to="/get-started"
             className="rounded-lg bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground transition-all hover:glow-emerald"
@@ -182,7 +198,7 @@ const Navbar = () => {
           animate={{ opacity: 1, y: 0 }}
           className="glass-surface border-t border-border lg:hidden"
         >
-          <div className="flex flex-col gap-4 px-6 py-6">
+          <div className="flex flex-col gap-4 px-4 sm:px-6 py-5">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Ecosystem Menu</p>
             {ecosystemLinks.map((item) => (
               <Link
@@ -227,6 +243,14 @@ const Navbar = () => {
                 </button>
               ))}
             </div>
+
+            <button
+              onClick={toggleTheme}
+              className="inline-flex items-center justify-center gap-2 rounded-lg border border-border px-3 py-2 text-sm text-muted-foreground transition-colors hover:border-primary/30 hover:text-primary"
+            >
+              {isDark ? <Sun size={14} /> : <Moon size={14} />}
+              {isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
+            </button>
 
             <Link
               to="/get-started"

@@ -48,7 +48,7 @@ const features = [
 
 const FeaturesPage = () => (
   <div className="min-h-screen bg-background">
-    <div className="container mx-auto px-6 py-24">
+    <div className="container mx-auto px-4 py-20 sm:px-6 sm:py-24">
       <AppBreadcrumb items={[{ label: "Home", href: "/", icon: Home }, { label: "All Features", icon: Cpu }]} />
 
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center">
@@ -56,7 +56,7 @@ const FeaturesPage = () => (
           <Cpu size={18} />
           <p className="text-sm font-medium uppercase tracking-[0.3em]">Platform Features</p>
         </div>
-        <h1 className="text-4xl font-bold font-display md:text-6xl text-foreground">
+        <h1 className="text-3xl font-bold font-display sm:text-4xl md:text-6xl text-foreground">
           Powering Every Layer of <span className="text-gradient-primary">Agriculture</span>
         </h1>
       </motion.div>
